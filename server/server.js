@@ -11,9 +11,6 @@ import {
   verifyAuthentiocationUser,
 } from "./middleware/authmiddleware.js";
 
-import connectMySQL from "express-mysql-session";
-
-const MySQLStore = connectMySQL(session);
 
 dotenv.config();
 
@@ -29,19 +26,12 @@ app.use(
   })
 );
 
-const store = new MySQLStore({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: process.env.MYSQL_PASSWORD,
-  database: "avido_fitness_project",
-});
 app.use(
   session({
     secret: "validation",
     resave: false,
     saveUninitialized: false,
-    store: store,
+    // store: store,
     cookie: {
       httpOnly: true,
       sameSite: "none",

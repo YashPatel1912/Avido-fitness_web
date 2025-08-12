@@ -62,7 +62,7 @@ export const postRegisterData = async (req, res) => {
 
   const { userName, email, password } = data;
 
-  const userExists = await verifyUserbyEmail({ email });
+  const userExists = await verifyUserbyEmail( email );
 
   if (userExists) {
     res.status(400).json({ message: ["User already exists."] });
@@ -145,8 +145,6 @@ export const postContactData = async (req, res) => {
   const { name, email, message } = data;
 
   const user = await verifyUserbyEmail(email);
-
-  console.log(user);
 
   if (!user) {
     res.status(400).json({ message: ["Invalid Creadentials ."] });
