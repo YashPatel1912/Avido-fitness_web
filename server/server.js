@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://avido-fitness.netlify.app/",
+    origin: "https://avido-fitness.netlify.app",
     credentials: true,
   })
 );
