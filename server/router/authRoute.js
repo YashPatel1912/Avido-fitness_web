@@ -8,9 +8,9 @@ import {
 
 router.route("/").get(authControler.getBackendPage)
 
-router.route("/api/login").post(authControler.postLoginData);
-router.route("/api/register").post(authControler.postRegisterData);
-router.route("/api/check-auth").get(authControler.checkAuthData);
+router.route("api/login").post(authControler.postLoginData);
+router.route("api/register").post(authControler.postRegisterData);
+router.route("api/check-auth").get(authControler.checkAuthData);
 
 router.route("/logout").post(authControler.logoutUser);
 
