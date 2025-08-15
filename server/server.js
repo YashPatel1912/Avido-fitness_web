@@ -11,6 +11,9 @@ import {
   verifyAuthentiocationUser,
 } from "./middleware/authmiddleware.js";
 
+import connectMySQL from "express-mysql-session";
+
+const MySQLStore = connectMySQL(session);
 
 dotenv.config();
 
@@ -21,17 +24,24 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://avido-fitness.netlify.app"],
+    origin: ["http://localhost:5173", "https://avido-fitness.netlify.app"],
     credentials: true,
   })
 );
+const store = new MySQLStore({
+  host: process.env.MYSQL_HOSTNAME,
+  port: process.env.MYSQL_PORT,
+  user: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_NAME,
+});
 
 app.use(
   session({
     secret: "validation",
     resave: false,
     saveUninitialized: false,
-    // store: store,
+    store: store,
     cookie: {
       httpOnly: true,
       sameSite: "none",
@@ -51,7 +61,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/", authRoute);
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>

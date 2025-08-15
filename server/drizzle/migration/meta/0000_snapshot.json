@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "37e9e994-63e0-4376-8f53-2bc87d3ed212",
+  "id": "3017fc51-fe3b-472d-ab41-a65c3eddf3af",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "contact_table": {
@@ -533,8 +533,8 @@
           "autoincrement": false,
           "default": "(now())"
         },
-        "upadted_at": {
-          "name": "upadted_at",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,

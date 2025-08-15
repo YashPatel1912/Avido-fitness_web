@@ -70,7 +70,7 @@ CREATE TABLE `session_table` (
 	`user_agent` text,
 	`ip` varchar(255),
 	`created_at` timestamp NOT NULL DEFAULT (now()),
-	`upadted_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT `session_table_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
