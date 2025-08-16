@@ -43,7 +43,7 @@ import {
 } from "../validators/authValidation.js";
 import { google } from "../lib/oauth/google.js";
 
-export const getBackendPage = (req,res) => {
+export const getBackendPage = (req, res) => {
   res.send("Backend is running ");
 };
 
@@ -62,7 +62,7 @@ export const postRegisterData = async (req, res) => {
 
   const { userName, email, password } = data;
 
-  const userExists = await verifyUserbyEmail( email );
+  const userExists = await verifyUserbyEmail(email);
 
   if (userExists) {
     res.status(400).json({ message: ["User already exists."] });
