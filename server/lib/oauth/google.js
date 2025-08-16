@@ -4,5 +4,5 @@ import { env } from "../../config/env.js";
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
   env.GOOGLE_CLIENT_SECRET,
-  `${process.env.FRONTEND_URL}/google/callback`
+  "https://avido-fitness.netlify.app/google/callback"
 );

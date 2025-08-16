@@ -17,7 +17,6 @@ export const verifyAuthentiocationUser = async (req, res, next) => {
   req.user = null;
 
   if (!accessToken && !refreshToken) {
-    res.status(401).json({ error: "Unauthorized" });
     return next();
   }
 
