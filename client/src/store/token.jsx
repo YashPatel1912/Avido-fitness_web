@@ -11,13 +11,17 @@ export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState([]);
   const [memebership, setMemberShip] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/check-auth`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/check-auth`,
+          {
+            credentials: "include",
+          }
+        );
 
         const data = await response.json();
 
@@ -30,6 +34,8 @@ export const UserProvider = ({ children }) => {
       } catch (error) {
         toast.error(error);
         setIsLoggedIn(false);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -40,13 +46,16 @@ export const UserProvider = ({ children }) => {
     const stripeKey = await stripepromise;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/check-out`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(memebership),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/check-out`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(memebership),
+        }
+      );
       const session = await response.json();
 
       if (!response.ok || !session?.id) {
@@ -89,6 +98,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         isLoggedIn,
+        loading,
         setIsLoggedIn,
         setMemberShip,
         memebership,
@@ -105,4 +115,3 @@ export const useAuth = () => {
   const AuthContextValue = useContext(UserContext);
   return AuthContextValue;
 };
-

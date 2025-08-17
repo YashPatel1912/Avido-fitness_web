@@ -3,15 +3,17 @@ import { useAuth } from "../../store/token";
 import { useEffect } from "react";
 
 const ProtectedRoute = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoggedIn === false) navigate("/register");
-  }, [isLoggedIn, navigate]);
+    if (!loading && isLoggedIn === false) {
+      navigate("/register");
+    }
+  }, [isLoggedIn, loading, navigate]);
 
-  if (isLoggedIn === null) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return <p>Loading...</p>; 
   }
 
   return <Outlet />;
