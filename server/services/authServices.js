@@ -302,8 +302,8 @@ export const getMembershipData = async ({ userId }) => {
     .from(membershipTable)
     .where(
       and(
-        lte(membershipTable.expiryDate, sql`CURRENT_DATE`),
-        eq(membershipTable.userId, userId)
+        eq(membershipTable.userId, userId),
+        lt(membershipTable.expiryDate, sql`CURRENT_DATE`)
       )
     );
 
@@ -463,8 +463,7 @@ export const createUserWithOuth = async ({
   return user;
 };
 
-
 // * addPassword
-export const addPassword = async({password , email }) => {
-  await db.insert(usersTable).values
-}
+export const addPassword = async ({ password, email }) => {
+  await db.insert(usersTable).values;
+};

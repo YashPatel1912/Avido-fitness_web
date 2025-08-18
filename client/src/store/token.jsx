@@ -34,9 +34,8 @@ export const UserProvider = ({ children }) => {
       } catch (error) {
         toast.error(error);
         setIsLoggedIn(false);
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     };
 
     checkAuth();
@@ -99,6 +98,7 @@ export const UserProvider = ({ children }) => {
       value={{
         isLoggedIn,
         loading,
+        setLoading,
         setIsLoggedIn,
         setMemberShip,
         memebership,
